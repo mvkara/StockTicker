@@ -1,0 +1,32 @@
+@using NabStockTickerSource.DomainObjects
+@{
+    ViewData["Title"] = "StockPrice";
+}
+
+<h2>StockPrice</h2>
+
+<form asp-controller="StockPrice" asp-action="Index">
+    <p>
+        Stock Code: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+
+<ul>
+    <table>
+        <tr>
+            <th>StockCode</th>
+            <th>LastPrice</th>
+        </tr>
+        @foreach (var stockPriceUpdate in (IEnumerable<StockPriceUpdate>)ViewData["StockPrices"])
+        {
+            <tr>
+                <td>@stockPriceUpdate.FeedCode</td>
+                <td>@stockPriceUpdate.Price</td>
+            </tr>
+        }
+    </table>
+</ul>
+
+
