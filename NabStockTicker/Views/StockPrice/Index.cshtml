@@ -3,6 +3,12 @@
     ViewData["Title"] = "StockPrice";
 }
 
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+
 <h2>StockPrice</h2>
 
 <form asp-controller="StockPrice" asp-action="Index">
@@ -12,21 +18,20 @@
     </p>
 </form>
 
+<a asp-area="" asp-controller="StockPrice" asp-action="Index">Refresh Page</a>
 
-<ul>
-    <table>
+<table style="width:100%">
+    <tr>
+        <th>StockCode</th>
+        <th>LastPrice</th>
+    </tr>
+    @foreach (var stockPriceUpdate in (IEnumerable<StockPriceUpdate>)ViewData["StockPrices"])
+    {
         <tr>
-            <th>StockCode</th>
-            <th>LastPrice</th>
+            <td>@stockPriceUpdate.FeedCode</td>
+            <td>@stockPriceUpdate.Price</td>
         </tr>
-        @foreach (var stockPriceUpdate in (IEnumerable<StockPriceUpdate>)ViewData["StockPrices"])
-        {
-            <tr>
-                <td>@stockPriceUpdate.FeedCode</td>
-                <td>@stockPriceUpdate.Price</td>
-            </tr>
-        }
-    </table>
-</ul>
+    }
+</table>
 
 

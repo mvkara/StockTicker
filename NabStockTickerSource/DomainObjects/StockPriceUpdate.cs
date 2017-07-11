@@ -18,5 +18,10 @@ namespace NabStockTickerSource.DomainObjects
         public string FeedCode { get; private set; }
 
         public double Price { get; private set; }
+
+        public override string ToString()
+        {
+            return string.Format("FeedCode: {0}, Price: {1}", this.FeedCode, this.Price);
+        }
     }
 }

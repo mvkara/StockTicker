@@ -23,10 +23,18 @@ namespace NabStockTicker.Controllers
         {
             StockPriceUpdate stockPriceUpdate;
 
-            ViewData[StockPricePropertyName] = 
-                !String.IsNullOrEmpty(searchString) && this.stockTickerSource.TryGetLastStockPriceByFeedCode(searchString, out stockPriceUpdate)
-                ? ViewData[StockPricePropertyName] = new[] { stockPriceUpdate }
-                : this.stockTickerSource.CurrentPrices;
+            if (String.IsNullOrEmpty(searchString))
+            {
+                ViewData[StockPricePropertyName] = this.stockTickerSource.CurrentPrices;
+            }
+            else if (this.stockTickerSource.TryGetLastStockPriceByFeedCode(searchString, out stockPriceUpdate))
+            {
+                ViewData[StockPricePropertyName] = new[] { stockPriceUpdate };
+            }
+            else
+            {
+                ViewData[StockPricePropertyName] = Enumerable.Empty<StockPriceUpdate>();
+            }
             
             return View();
         }

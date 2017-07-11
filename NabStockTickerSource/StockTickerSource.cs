@@ -19,6 +19,8 @@ namespace NabStockTickerSource
     {
         private const double PriceChangeRateInSeconds = 5.0;
 
+        private IRandomNumberGenerator randomNumberGenerator;
+
         private Dictionary<string, StockPriceUpdate> lastStockPriceByFeedCode;
         private ReaderWriterLockSlim readerWriterLockSlim = new ReaderWriterLockSlim();
         private IDisposable timerSubscription;
@@ -28,13 +30,15 @@ namespace NabStockTickerSource
         // If I get time figure out how ASP.NET gets configuration and how to wire that
         // up to its dependency injection framework.
         public StockTickerSource()
-            : this(new InitialDataGenerator(), TaskPoolScheduler.Default, TimeSpan.FromSeconds(PriceChangeRateInSeconds))
+            : this(new InitialDataGenerator(), new RandomNumberGenerator(), TaskPoolScheduler.Default, TimeSpan.FromSeconds(PriceChangeRateInSeconds))
         {
         }
 
         // RAII - Acquiring the resource is its initialisation.
-        public StockTickerSource(IInitialDataGenerator dataGenerator, IScheduler timeScheduler, TimeSpan pollingInterval)
+        public StockTickerSource(IInitialDataGenerator dataGenerator, IRandomNumberGenerator randomNumberGenerator, IScheduler timeScheduler, TimeSpan pollingInterval)
         {
+            this.randomNumberGenerator = randomNumberGenerator;
+
             this.lastStockPriceByFeedCode = dataGenerator.GenerateStocks().ToDictionary(x => x.FeedCode, x => x);
 
             this.timerSubscription =
@@ -74,8 +78,6 @@ namespace NabStockTickerSource
 
         private void GeneratePricesMovement(bool isDirectionUp)
         {
-            Random random = new Random();
-
             // I'm assuming as part of the spec that we can't update the prices one by one and we
             // need consistency across prices updated so using a lock here.
             this.readerWriterLockSlim.EnterWriteLock();
@@ -84,11 +86,13 @@ namespace NabStockTickerSource
             foreach (var feedcode in feedCodes)
             {
                 var previousPrice = this.lastStockPriceByFeedCode[feedcode];
+                
+                var nextRandom = this.randomNumberGenerator.NextRandom();
 
                 var newPrice =
                     isDirectionUp
-                    ? previousPrice.Price + random.NextDouble()
-                    : Math.Max(0, previousPrice.Price - random.NextDouble());
+                    ? previousPrice.Price + nextRandom
+                    : Math.Max(0, previousPrice.Price - nextRandom);
 
                 this.lastStockPriceByFeedCode[feedcode] = new StockPriceUpdate(feedcode, newPrice);
             }

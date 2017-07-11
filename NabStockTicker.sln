@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NabStockTickerSource.Unit", "tests\NabStockTickerSource.Unit\NabStockTickerSource.Unit.csproj", "{FBA259B1-4825-4F7C-AA05-4ED1F6308CA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NabStockTicker.Unit", "tests\NabStockTicker.Unit\NabStockTicker.Unit.csproj", "{EE627EC4-B759-4C3C-B52B-41310A6026D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NabStockTicker.Unit", "tests\NabStockTicker.Unit\NabStockTicker.Unit.csproj", "{63202738-1DD1-4E6D-B370-5ABFAB70EBA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,16 +31,16 @@ Global
 		{FBA259B1-4825-4F7C-AA05-4ED1F6308CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBA259B1-4825-4F7C-AA05-4ED1F6308CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBA259B1-4825-4F7C-AA05-4ED1F6308CA7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE627EC4-B759-4C3C-B52B-41310A6026D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE627EC4-B759-4C3C-B52B-41310A6026D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE627EC4-B759-4C3C-B52B-41310A6026D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE627EC4-B759-4C3C-B52B-41310A6026D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63202738-1DD1-4E6D-B370-5ABFAB70EBA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63202738-1DD1-4E6D-B370-5ABFAB70EBA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63202738-1DD1-4E6D-B370-5ABFAB70EBA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63202738-1DD1-4E6D-B370-5ABFAB70EBA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FBA259B1-4825-4F7C-AA05-4ED1F6308CA7} = {5B91A18A-D9D7-4C0F-94D4-B670EB335753}
-		{EE627EC4-B759-4C3C-B52B-41310A6026D2} = {5B91A18A-D9D7-4C0F-94D4-B670EB335753}
+		{63202738-1DD1-4E6D-B370-5ABFAB70EBA5} = {5B91A18A-D9D7-4C0F-94D4-B670EB335753}
 	EndGlobalSection
 EndGlobal
